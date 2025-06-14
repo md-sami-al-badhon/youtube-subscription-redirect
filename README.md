@@ -42,8 +42,21 @@ By default, this extension redirects **both** YouTube Home and Shorts pages to `
 If you'd like to redirect **Shorts to another page** (e.g., your homepage or a playlist), open `background.js` and modify this part:
 
 ```js
-if (url.pathname.startsWith('/shorts')) {
-  // Change this line to redirect wherever you want
-  const newUrl = new URL('https://www.youtube.com/feed/subscriptions');
-  chrome.tabs.update(tabId, { url: newUrl.href });
+ if (shouldRedirect(url)) {
+      // Change the URL if you want to redirect to a different page
+      const newUrl = new URL(url.origin + '/');
+      newUrl.searchParams.delete('navigation');
+      chrome.tabs.update(tabId, { url: newUrl.href });
+    }
+
+function shouldRedirect(url) {
+ 
+  // Redirect Shorts
+  if (url.pathname.startsWith('/shorts')) {
+    return true;
+  }
+
+  // add more conditions here if needed
+
+  return false;
 }
