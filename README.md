@@ -43,7 +43,7 @@ If you'd like to redirect **Shorts to another page** (e.g., your homepage or a p
 
 ```js
  if (shouldRedirect(url)) {
-      // Redirecting to the home page. Change the URL if you want to redirect to a different page
+      // Redirecting to the home page. Change the URL if you want to redirect to a different page.
       const newUrl = new URL(url.origin + '/');
       newUrl.searchParams.delete('navigation');
       chrome.tabs.update(tabId, { url: newUrl.href });
@@ -56,7 +56,7 @@ function shouldRedirect(url) {
     return true;
   }
 
-  // add more conditions here if needed
+  // add more conditions here if needed.
 
   return false;
 }
